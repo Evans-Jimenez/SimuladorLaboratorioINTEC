@@ -52,15 +52,15 @@ button:active {
 
 #barraProgreso {
   width: 100%;
-  background-color: #e0e0e0; /* Color del fondo de la barra */
-  border-radius: 5px; /* Bordes redondeados */
-  margin-top: 20px; /* Espaciado superior */
+  background-color: #e0e0e0; 
+  border-radius: 5px; 
+  margin-top: 20px; 
 }
 
 #progreso {
   width: 0%;
   height: 20px;
-  background-color: #4caf50; /* Color de la barra de progreso */
-  transition: width 0.4s ease; /* Transición suave */
-  border-radius: 5px; /* Bordes redondeados */
+  background-color: #4caf50; 
+  transition: width 0.4s ease;
+  border-radius: 5px; 
 }

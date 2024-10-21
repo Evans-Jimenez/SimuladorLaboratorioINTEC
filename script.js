@@ -85,6 +85,7 @@ function iniciarNivel1() {
 // Avanzar a Nivel 2
 function avanzarANivel2() {
     nivelActual++;
+    actualizarBarraProgreso();
     document.getElementById("nivel1").style.display = "none";
     document.getElementById("nivel2").style.display = "block";
     document.getElementById("nivelTitulo").textContent = "Nivel 2: Encender la Cámara";
@@ -107,6 +108,7 @@ function iniciarNivel2() {
 // Avanzar a Nivel 3
 function avanzarANivel3() {
     nivelActual++;
+    actualizarBarraProgreso();
     document.getElementById("nivel2").style.display = "none";
     document.getElementById("nivel3").style.display = "block";
     document.getElementById("nivelTitulo").textContent = "Nivel 3: Cambiar el Modo de Captura";
@@ -128,6 +130,7 @@ function iniciarNivel3() {
 // Avanzar a Nivel 4
 function avanzarANivel4() {
     nivelActual++;
+    actualizarBarraProgreso();
     document.getElementById("nivel3").style.display = "none";
     document.getElementById("nivel4").style.display = "block";
     document.getElementById("nivelTitulo").textContent = "Nivel 4: Capturar Imagen";
