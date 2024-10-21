@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Laboratorio INTEC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Simulador de Procesos del Laboratorio</h1>
+    </header>
+
+    <main>
+        <!-- Barra de Progreso -->
+        <section id="barraProgreso">
+            <div id="progreso"></div>
+        </section>
+
+        <!-- Sección del menú inicial -->
+        <section id="menu-inicio">
+            <h2>Bienvenido</h2>
+            <p>Selecciona una opción para empezar:</p>
+            <button id="iniciarJuego"><i class="fas fa-play"></i> Iniciar Juego</button>
+            <button id="instruccionesJuego"><i class="fas fa-info-circle"></i> Instrucciones</button>
+        </section>
+
+        <!-- Sección de instrucciones -->
+        <section id="instrucciones" style="display:none;">
+            <h2>Instrucciones</h2>
+            <p>Deberás seguir los pasos correctos para manejar la cámara Theta SC2. Si completas la secuencia correcta, avanzarás de nivel.</p>
+            <button id="volverMenu"><i class="fas fa-arrow-left"></i> Volver al Menú</button>
+        </section>
+
+        <!-- Sección del juego -->
+        <section id="juego" style="display:none;">
+            <h2 id="nivelTitulo">Nivel 1: Obtener la Cámara</h2>
+            <p id="mensaje">Haz clic en los botones para completar los pasos del nivel.</p>
+
+            <!-- Puntuación -->
+            <section id="puntuacion">
+                <h2>Puntuación: <span id="puntos">0</span></h2>
+            </section>
+
+            <!-- Botones para el Nivel 1 -->
+            <div id="nivel1" style="display:none;">
+                <button id="abrirGabinete"><i class="fas fa-door-open"></i> Abrir Gabinete</button>
+                <button id="tomarCamara"><i class="fas fa-camera"></i> Tomar Cámara</button>
+                <button id="cerrarGabinete"><i class="fas fa-door-closed"></i> Cerrar Gabinete</button>
+            </div>
+
+            <!-- Botones para el Nivel 2 -->
+            <div id="nivel2" style="display:none;">
+                <button id="encenderCamara"><i class="fas fa-power-off"></i> Encender Cámara</button>
+                <button id="verificarPanel"><i class="fas fa-eye"></i> Verificar Panel OLED</button>
+            </div>
+
+            <!-- Botones para el Nivel 3 -->
+            <div id="nivel3" style="display:none;">
+                <button id="modoFoto"><i class="fas fa-camera"></i> Seleccionar Modo Foto</button>
+                <button id="modoVideo"><i class="fas fa-video"></i> Seleccionar Modo Video</button>
+            </div>
+
+            <!-- Botones para el Nivel 4 -->
+            <div id="nivel4" style="display:none;">
+                <button id="capturarImagen"><i class="fas fa-camera-retro"></i> Capturar Imagen</button>
+            </div>
+
+            <p id="resultado"></p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
