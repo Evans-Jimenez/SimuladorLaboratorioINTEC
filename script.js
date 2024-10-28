@@ -8,7 +8,7 @@ let totalNiveles = 4;
 document.getElementById("iniciarJuego").addEventListener("click", function () {
     document.getElementById("menu-inicio").style.display = "none";
     document.getElementById("juego").style.display = "block";
-    iniciarNivel1(); // Iniciar el primer nivel
+    iniciarNivel(nivelActual); // Iniciar el primer nivel
 });
 
 // Función para mostrar las instrucciones
@@ -34,22 +34,26 @@ function validarSecuencia(paso, boton) {
     secuenciaJugador.push(paso);
 
     if (secuenciaJugador.length === secuenciaCorrecta.length) {
-        if (JSON.stringify(secuenciaJugador) === JSON.stringify(secuenciaCorrecta)) {
+        let secuenciaCorrectaEsCorrecta = true;
+
+        // Compara las secuencias
+        for (let i = 0; i < secuenciaCorrecta.length; i++) {
+            if (secuenciaJugador[i] !== secuenciaCorrecta[i]) {
+                secuenciaCorrectaEsCorrecta = false;
+                break;
+            }
+        }
+
+        if (secuenciaCorrectaEsCorrecta) {
             document.getElementById("resultado").textContent = "¡Secuencia correcta! Has completado el nivel.";
             actualizarPuntuacion(10);
             actualizarBarraProgreso();
-            switch (nivelActual) {
-                case 1:
-                    avanzarANivel2();
-                    break;
-                case 2:
-                    avanzarANivel3();
-                    break;
-                case 3:
-                    avanzarANivel4();
-                    break;
-                default:
-                    break; // Si hay más niveles, manejar según sea necesario
+
+            // Verifica si hay más niveles y avanza
+            if (nivelActual < totalNiveles) {
+                avanzarANivel(nivelActual + 1); // Avanza al siguiente nivel
+            } else {
+                document.getElementById("resultado").textContent = "¡Has completado todos los niveles!";
             }
         } else {
             document.getElementById("resultado").textContent = "Secuencia incorrecta. Perdiste los puntos.";
@@ -61,83 +65,84 @@ function validarSecuencia(paso, boton) {
 }
 
 
-// Nivel 1
-function iniciarNivel1() {
+// Avanzar a Nivel
+function avanzarANivel(nivel) {
+    nivelActual = nivel; // Actualiza el nivel actual
+
+    // Oculta todos los niveles
+    for (let i = 1; i <= 4; i++) {
+        document.getElementById(`nivel${i}`).style.display = "none"; // Asumiendo que tienes niveles del 1 al 4
+    }
+
+    // Muestra el nivel correspondiente
+    document.getElementById(`nivel${nivel}`).style.display = "block";
+
+    // Actualiza el título del nivel
+    document.getElementById("nivelTitulo").textContent = `Nivel ${nivel}: ${getTituloNivel(nivel)}`;
+
+    // Inicia el nivel correspondiente
+    iniciarNivel(nivel);
+}
+
+function getTituloNivel(nivel) {
+    switch (nivel) {
+        case 1:
+            return "Introducción";
+        case 2:
+            return "Encender la Cámara";
+        case 3:
+            return "Nivel 3: Desafío";
+        case 4:
+            return "Nivel 4: Maestro";
+        default:
+            return "Nivel Desconocido";
+    }
+}
+
+function iniciarNivel(nivel) {
     secuenciaJugador = [];
-    secuenciaCorrecta = [1, 2, 3]; // Secuencia correcta para nivel 1
-    document.getElementById("nivel1").style.display = "block";
+    switch (nivel) {
+        case 1:
+            secuenciaCorrecta = [1, 2, 3]; // Secuencia correcta para nivel 1
+            document.getElementById("nivel1").style.display = "block";
 
-    document.getElementById("abrirGabinete").addEventListener("click", function () {
-        validarSecuencia(1, this);
-    });
-    document.getElementById("tomarCamara").addEventListener("click", function () {
-        validarSecuencia(2, this);
-    });
-    document.getElementById("cerrarGabinete").addEventListener("click", function () {
-        validarSecuencia(3, this);
-    });
-}
+            document.getElementById("abrirGabinete").addEventListener("click", function () {
+                validarSecuencia(1, this);
+            });
+            document.getElementById("tomarCamara").addEventListener("click", function () {
+                validarSecuencia(2, this);
+            });
+            document.getElementById("cerrarGabinete").addEventListener("click", function () {
+                validarSecuencia(3, this);
+            });
+            return;
+        case 2:
+            secuenciaCorrecta = [1, 2]; // Secuencia para nivel 2
 
-// Avanzar a Nivel 2
-function avanzarANivel2() {
-    nivelActual++;
-    document.getElementById("nivel1").style.display = "none";
-    document.getElementById("nivel2").style.display = "block";
-    document.getElementById("nivelTitulo").textContent = "Nivel 2: Encender la Cámara";
-    iniciarNivel2();
-}
-
-// Nivel 2
-function iniciarNivel2() {
-    secuenciaJugador = [];
-    secuenciaCorrecta = [1, 2]; // Secuencia para nivel 2
-
-    document.getElementById("encenderCamara").addEventListener("click", function () {
-        validarSecuencia(1, this);
-    });
-    document.getElementById("verificarPanel").addEventListener("click", function () {
-        validarSecuencia(2, this);
-    });
-}
-
-// Avanzar a Nivel 3
-function avanzarANivel3() {
-    nivelActual++;
-    document.getElementById("nivel2").style.display = "none";
-    document.getElementById("nivel3").style.display = "block";
-    document.getElementById("nivelTitulo").textContent = "Nivel 3: Cambiar el Modo de Captura";
-    iniciarNivel3();
-}
-
-// Nivel 3
-function iniciarNivel3() {
-    secuenciaJugador = [];
-    secuenciaCorrecta = [1]; // Solo un paso: seleccionar modo
-    document.getElementById("modoFoto").addEventListener("click", function () {
-        validarSecuencia(1, this);
-    });
-    document.getElementById("modoVideo").addEventListener("click", function () {
-        validarSecuencia(1, this);
-    });
-}
-
-// Avanzar a Nivel 4
-function avanzarANivel4() {
-    nivelActual++;
-    document.getElementById("nivel3").style.display = "none";
-    document.getElementById("nivel4").style.display = "block";
-    document.getElementById("nivelTitulo").textContent = "Nivel 4: Capturar Imagen";
-    iniciarNivel4();
-}
-
-// Nivel 4
-function iniciarNivel4() {
-    secuenciaJugador = [];
-    secuenciaCorrecta = [1]; // Solo un paso: capturar imagen
-    document.getElementById("capturarImagen").addEventListener("click", function () {
-        validarSecuencia(1, this);
-        actualizarBarraProgreso()
-    });
+            document.getElementById("encenderCamara").addEventListener("click", function () {
+                validarSecuencia(1, this);
+            });
+            document.getElementById("verificarPanel").addEventListener("click", function () {
+                validarSecuencia(2, this);
+            });
+            return;
+        case 3:
+            secuenciaCorrecta = [1]; // Solo un paso: seleccionar modo
+            document.getElementById("modoFoto").addEventListener("click", function () {
+                validarSecuencia(1, this);
+            });
+            document.getElementById("modoVideo").addEventListener("click", function () {
+                validarSecuencia(1, this);
+            });
+            return;
+        case 4:
+            secuenciaCorrecta = [1]; // Solo un paso: capturar imagen
+            document.getElementById("capturarImagen").addEventListener("click", function () {
+                validarSecuencia(1, this);
+                actualizarBarraProgreso()
+            });
+            return;
+    }
 }
 
 // Función para actualizar la barra de progreso
