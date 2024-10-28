@@ -91,9 +91,9 @@ function getTituloNivel(nivel) {
         case 2:
             return "Encender la Cámara";
         case 3:
-            return "Desafío";
+            return "Cambiar el Modo de Captura";
         case 4:
-            return "Maestro";
+            return "Capturar Imagen";
         default:
             return "Nivel Desconocido";
     }
