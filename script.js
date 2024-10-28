@@ -37,12 +37,18 @@ function validarSecuencia(paso, boton) {
         if (JSON.stringify(secuenciaJugador) === JSON.stringify(secuenciaCorrecta)) {
             document.getElementById("resultado").textContent = "¡Secuencia correcta! Has completado el nivel.";
             actualizarPuntuacion(10);
-            if (nivelActual === 1) {
-                avanzarANivel2();
-            } else if (nivelActual === 2) {
-                avanzarANivel3();
-            } else if (nivelActual === 3) {
-                avanzarANivel4();
+            switch (nivelActual) {
+                case 1:
+                    avanzarANivel2();
+                    break;
+                case 2:
+                    avanzarANivel3();
+                    break;
+                case 3:
+                    avanzarANivel4();
+                    break;
+                default:
+                    break; // Si hay más niveles, manejar según sea necesario
             }
         } else {
             document.getElementById("resultado").textContent = "Secuencia incorrecta. Perdiste los puntos.";
@@ -52,6 +58,7 @@ function validarSecuencia(paso, boton) {
         }
     }
 }
+
 
 // Nivel 1
 function iniciarNivel1() {
