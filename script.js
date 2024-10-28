@@ -37,6 +37,7 @@ function validarSecuencia(paso, boton) {
         if (JSON.stringify(secuenciaJugador) === JSON.stringify(secuenciaCorrecta)) {
             document.getElementById("resultado").textContent = "¡Secuencia correcta! Has completado el nivel.";
             actualizarPuntuacion(10);
+            actualizarBarraProgreso();
             switch (nivelActual) {
                 case 1:
                     avanzarANivel2();
@@ -79,7 +80,6 @@ function iniciarNivel1() {
 
 // Avanzar a Nivel 2
 function avanzarANivel2() {
-    actualizarBarraProgreso();
     nivelActual++;
     document.getElementById("nivel1").style.display = "none";
     document.getElementById("nivel2").style.display = "block";
@@ -102,7 +102,6 @@ function iniciarNivel2() {
 
 // Avanzar a Nivel 3
 function avanzarANivel3() {
-    actualizarBarraProgreso();
     nivelActual++;
     document.getElementById("nivel2").style.display = "none";
     document.getElementById("nivel3").style.display = "block";
@@ -124,7 +123,6 @@ function iniciarNivel3() {
 
 // Avanzar a Nivel 4
 function avanzarANivel4() {
-    actualizarBarraProgreso();
     nivelActual++;
     document.getElementById("nivel3").style.display = "none";
     document.getElementById("nivel4").style.display = "block";
