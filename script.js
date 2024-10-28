@@ -91,9 +91,9 @@ function getTituloNivel(nivel) {
         case 2:
             return "Encender la Cámara";
         case 3:
-            return "Nivel 3: Desafío";
+            return "Desafío";
         case 4:
-            return "Nivel 4: Maestro";
+            return "Maestro";
         default:
             return "Nivel Desconocido";
     }
