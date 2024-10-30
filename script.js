@@ -3,6 +3,7 @@ let secuenciaCorrecta = [];
 let secuenciaJugador = [];
 let puntos = 0;
 let totalNiveles = 4;
+let NombreNivel = ["Introducción","Encender la Cámara","Cambiar el Modo de Captura","Capturar Imagen"]
 
 // Función para iniciar el juego y mostrar el primer nivel
 document.getElementById("iniciarJuego").addEventListener("click", function () {
@@ -78,25 +79,10 @@ function avanzarANivel(nivel) {
     document.getElementById(`nivel${nivel}`).style.display = "block";
 
     // Actualiza el título del nivel
-    document.getElementById("nivelTitulo").textContent = `Nivel ${nivel}: ${getTituloNivel(nivel)}`;
+    document.getElementById("nivelTitulo").textContent = `Nivel ${nivel}: ${NombreNivel[nivel - 1]}`;
 
     // Inicia el nivel correspondiente
     iniciarNivel(nivel);
-}
-
-function getTituloNivel(nivel) {
-    switch (nivel) {
-        case 1:
-            return "Introducción";
-        case 2:
-            return "Encender la Cámara";
-        case 3:
-            return "Cambiar el Modo de Captura";
-        case 4:
-            return "Capturar Imagen";
-        default:
-            return "Nivel Desconocido";
-    }
 }
 
 function iniciarNivel(nivel) {
