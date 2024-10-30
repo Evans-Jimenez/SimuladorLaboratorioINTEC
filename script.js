@@ -2,8 +2,8 @@ let nivelActual = 1;
 let secuenciaCorrecta = [];
 let secuenciaJugador = [];
 let puntos = 0;
-let totalNiveles = 4;
-let NombreNivel = ["Introducción","Encender la Cámara","Cambiar el Modo de Captura","Capturar Imagen"]
+let NombreNivel = ["","Encender la Cámara","Cambiar el Modo de Captura","Capturar Imagen", "Fin"]
+let totalNiveles = NombreNivel.length;
 
 // Función para iniciar el juego y mostrar el primer nivel
 document.getElementById("iniciarJuego").addEventListener("click", function () {
@@ -71,7 +71,7 @@ function avanzarANivel(nivel) {
     nivelActual = nivel; // Actualiza el nivel actual
 
     // Oculta todos los niveles
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= totalNiveles; i++) {
         document.getElementById(`nivel${i}`).style.display = "none"; // Asumiendo que tienes niveles del 1 al 4
     }
 
@@ -79,7 +79,11 @@ function avanzarANivel(nivel) {
     document.getElementById(`nivel${nivel}`).style.display = "block";
 
     // Actualiza el título del nivel
-    document.getElementById("nivelTitulo").textContent = `Nivel ${nivel}: ${NombreNivel[nivel - 1]}`;
+    if (nivelActual < totalNiveles) {
+        document.getElementById("nivelTitulo").textContent = `Nivel ${nivel}: ${NombreNivel[nivel - 1]}`;   
+    } else {
+        document.getElementById("nivelTitulo").textContent = "Final";
+    }
 
     // Inicia el nivel correspondiente
     iniciarNivel(nivel);
@@ -125,14 +129,32 @@ function iniciarNivel(nivel) {
             secuenciaCorrecta = [1]; // Solo un paso: capturar imagen
             document.getElementById("capturarImagen").addEventListener("click", function () {
                 validarSecuencia(1, this);
-                actualizarBarraProgreso()
+            });
+            return
+        case 5:
+            document.getElementById("mensaje").textContent = "\n";
+            document.getElementById("nivelTitulo").textContent = "Final";
+            document.getElementById("resultado").textContent = "";
+            document.getElementById("volverMenuF").addEventListener("click", function () {
+                document.getElementById("juego").style.display = "none";
+                document.getElementById("menu-inicio").style.display = "block"; // Vuelve al menú
+                Reinicio();
+                
             });
             return;
     }
 }
+function Reinicio(){
+                nivelActual = 0;
+                nivel = nivelActual;
+                actualizarBarraProgreso();
+                puntos = 0;
+                secuenciaJugador = [];
+                avanzarANivel(nivel = 1)
+}
 
 // Función para actualizar la barra de progreso
 function actualizarBarraProgreso() {
-    const porcentaje = (nivelActual / totalNiveles) * 100; // Calcular el porcentaje de progreso
+    const porcentaje = (nivelActual / (totalNiveles - 1)) * 100; // Calcular el porcentaje de progreso
     document.getElementById("progreso").style.width = porcentaje + "%"; // Actualizar el ancho de la barra
 }
