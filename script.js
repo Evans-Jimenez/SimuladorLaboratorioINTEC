@@ -2,7 +2,7 @@ let nivelActual = 1;
 let secuenciaCorrecta = [];
 let secuenciaJugador = [];
 let puntos = 0;
-let NombreNivel = ["", "Encender la Cámara", "Cambiar el Modo de Captura", "Capturar Imagen", "Fin"]
+let NombreNivel = ["Bienvenido", "Encender la Cámara", "Cambiar el Modo de Captura", "Capturar Imagen", "Fin"]
 let totalNiveles = NombreNivel.length;
 
 // Función para iniciar el juego y mostrar el primer nivel
@@ -29,6 +29,10 @@ function actualizarPuntuacion(puntosGanados) {
     puntos += puntosGanados;
     document.getElementById("puntos").textContent = puntos;
 }
+
+window.onload = function () {
+    document.getElementById("TextInicio").textContent = `${NombreNivel[0]}`;
+  }
 
 // Función para validar secuencia
 function validarSecuencia(paso, boton) {
@@ -91,6 +95,7 @@ function avanzarANivel(nivel) {
 
 function iniciarNivel(nivel) {
     secuenciaJugador = [];
+    
     switch (nivel) {
         case 1:
             secuenciaCorrecta = [1, 2, 3]; // Secuencia correcta para nivel 1
@@ -131,14 +136,13 @@ function iniciarNivel(nivel) {
                 validarSecuencia(1, this);
             });
             return
-        case 5:
+        case totalNiveles:
             document.getElementById("mensaje").textContent = "\n";
             document.getElementById("nivelTitulo").textContent = "Final";
             document.getElementById("resultado").textContent = "\n";
             document.getElementById("volverMenuF").addEventListener("click", function () {
                 //Force a hard reload to clear the cache if supported by the browser
                 window.location.reload(true);
-
             });
             return;
     }
