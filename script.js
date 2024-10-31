@@ -2,7 +2,7 @@ let nivelActual = 1;
 let secuenciaCorrecta = [];
 let secuenciaJugador = [];
 let puntos = 0;
-let NombreNivel = ["","Encender la Cámara","Cambiar el Modo de Captura","Capturar Imagen", "Fin"]
+let NombreNivel = ["", "Encender la Cámara", "Cambiar el Modo de Captura", "Capturar Imagen", "Fin"]
 let totalNiveles = NombreNivel.length;
 
 // Función para iniciar el juego y mostrar el primer nivel
@@ -80,7 +80,7 @@ function avanzarANivel(nivel) {
 
     // Actualiza el título del nivel
     if (nivelActual < totalNiveles) {
-        document.getElementById("nivelTitulo").textContent = `Nivel ${nivel}: ${NombreNivel[nivel - 1]}`;   
+        document.getElementById("nivelTitulo").textContent = `Nivel ${nivel}: ${NombreNivel[nivel - 1]}`;
     } else {
         document.getElementById("nivelTitulo").textContent = "Final";
     }
@@ -136,21 +136,12 @@ function iniciarNivel(nivel) {
             document.getElementById("nivelTitulo").textContent = "Final";
             document.getElementById("resultado").textContent = "";
             document.getElementById("volverMenuF").addEventListener("click", function () {
-                document.getElementById("juego").style.display = "none";
-                document.getElementById("menu-inicio").style.display = "block"; // Vuelve al menú
-                Reinicio();
-                
+                //Force a hard reload to clear the cache if supported by the browser
+                window.location.reload(true);
+
             });
             return;
     }
-}
-function Reinicio(){
-                nivelActual = 0;
-                nivel = nivelActual;
-                actualizarBarraProgreso();
-                puntos = 0;
-                secuenciaJugador = [];
-                avanzarANivel(nivel = 1)
 }
 
 // Función para actualizar la barra de progreso
