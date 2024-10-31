@@ -134,7 +134,7 @@ function iniciarNivel(nivel) {
         case 5:
             document.getElementById("mensaje").textContent = "\n";
             document.getElementById("nivelTitulo").textContent = "Final";
-            document.getElementById("resultado").textContent = "";
+            document.getElementById("resultado").textContent = "\n";
             document.getElementById("volverMenuF").addEventListener("click", function () {
                 //Force a hard reload to clear the cache if supported by the browser
                 window.location.reload(true);
